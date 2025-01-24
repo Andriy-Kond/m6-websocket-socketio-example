@@ -1,0 +1,33 @@
+{
+  "name": "m6-email-verification-sendgrid",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node App.js",
+    "dev": "cross-env NODE_ENV=development nodemon App.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/register": "^7.25.9",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.2",
+    "nodemon": "^3.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "socket.io-client": "^4.8.1",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": "20.11"
+  }
+}
