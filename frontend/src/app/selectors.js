@@ -27,7 +27,7 @@ export const selectUserToken = state => state.auth.userToken;
 // [tasksApi.endpoints.fetchTasks.select()], // - обирає відповідну частину стора
 // Мемоїзований селектор
 export const selectTasksCountMemo = createSelector(
-  [tasksApi.endpoints.fetchTasks.select()], // обирає відповідну частину стора
+  [tasksApi.endpoints.fetchTaskById.select()], // обирає відповідну частину стора
   tasksResult => {
     console.log("Calculating task count");
     const tasks = tasksResult?.data || []; // без цієї перевірки дає помилку
@@ -61,7 +61,7 @@ export const selectTasksCountMemo = createSelector(
 
 // Мемоїзований селектор
 export const selectVisibleTasksMemo = createSelector(
-  [tasksApi.endpoints.fetchTasks.select(), selectFilters], // обирає відповідну частину стора
+  [tasksApi.endpoints.fetchTaskById.select(), selectFilters], // обирає відповідну частину стора
   (tasksResult, filter) => {
     // console.log("Calculating visible tasks");
     const tasks = tasksResult?.data || []; // без цієї перевірки дає помилку

@@ -1,7 +1,13 @@
-const { default: styled } = require("@emotion/styled");
-const { NavLink } = require("react-router-dom");
+import styled from "@emotion/styled";
+import { NavLink } from "react-router-dom";
 
-export const StyledNavLink = styled(NavLink)`
+const FilteredNavLink = ({ className, children, ...props }) => (
+  <NavLink {...props} className={className}>
+    {children}
+  </NavLink>
+);
+
+export const StyledNavLink = styled(FilteredNavLink)`
   font-weight: normal;
   color: #000;
   transition: transform 0.3s ease;
@@ -30,3 +36,23 @@ export const StyledNavLink = styled(NavLink)`
 //    invertColor={invertColor}>
 //    color: {hex}
 //  </ColorButton>;
+
+// import styled from "@emotion/styled";
+// import { NavLink } from "react-router-dom";
+
+// const FilteredNavLink = ({ className, children, ...props }) => (
+//   <NavLink {...props} className={className}>
+//     {children}
+//   </NavLink>
+// );
+
+// export const StyledNavLink = styled(FilteredNavLink)`
+//   font-weight: normal;
+//   color: #000;
+//   transition: transform 0.3s ease;
+
+//   &.active {
+//     font-weight: bold;
+//     color: #ff4500;
+//   }
+// `;

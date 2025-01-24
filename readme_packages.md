@@ -8,7 +8,7 @@
 - `ws` - A Node.js WebSocket library
 - [`socket.io`](https://socket.io/) - A Node.js WebSocket library
   [`npm i socket.io`](https://socket.io/docs/v4/server-installation/) for server
-  [`npm install socket.io-client`](https://socket.io/docs/v4/client-installation/#from-npm) for frontend (client)
+  [`npm i socket.io-client`](https://socket.io/docs/v4/client-installation/#from-npm) for frontend (client)
 
 ## Database
 
