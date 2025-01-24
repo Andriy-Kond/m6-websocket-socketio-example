@@ -1,25 +1,26 @@
 {
-  "name": "m6-websocket-socketio-example_frontend",
   "homepage": "https://Andriy-Kond.github.io/m6-websocket-socketio-example_frontend",
+  "name": "m6-websocket-socketio-example_frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.0.1",
-    "@testing-library/user-event": "^14.1.1",
-    "gh-pages": "^6.3.0",
+    "@reduxjs/toolkit": "^1.9.7",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.5.2",
+    "gh-pages": "^6.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-redux": "^8.0.1",
-    "react-router-dom": "^7.1.3",
+    "react-redux": "^8.1.3",
+    "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
-    "sass": "^1.83.4",
-    "web-vitals": "^2.1.0"
+    "sass": "^1.79.5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "set BROWSER=none&& react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

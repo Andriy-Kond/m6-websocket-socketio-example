@@ -1,5 +1,5 @@
 {
-  "name": "m6-email-verification-sendgrid",
+  "name": "m6-websocket-socketio-example_server",
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
