@@ -17,6 +17,12 @@ const io = new Server(httpServer, options);
 
 io.on("connection", socket => {
   console.log("New frontend connection");
+
+  // Listen event "chat-messages":
+  socket.on("chat-message", message => {
+    // Method broadcast() will send messages to all users except itself
+    socket.broadcast.emit("chat-message", message);
+  });
 });
 
 httpServer.listen(3001); // run http-server

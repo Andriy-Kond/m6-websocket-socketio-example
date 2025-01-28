@@ -9,32 +9,12 @@ import PublicRoute from "common/components/navigation/PublicRoute";
 
 import { setIsLoggedIn } from "features/auth/authSlice";
 import { useGetUserByTokenQuery } from "features/users/usersSlice";
-import ChatPage from "common/pages/ChatPage";
-
-// import "dotenv/config"; //! NOT NEEDS IN REACT!!! Otherwise will not works.
-// in .env:
-// SECRET_API_KEY=my_secret_key      # Wil NOT be available in React
-// REACT_APP_PUBLIC_API_URL=http://api.example.com # will be available in React
-// in final build:
-// console.log(process.env.REACT_APP_PUBLIC_API_URL); // will works
-// console.log(process.env.SECRET_API_KEY); // undefined
-import { io } from "socket.io-client";
-
-//% Connection to backend (to web-socket server)
-// "undefined" means the URL will be computed from the `window.location` object
-const URL = process.env.REACT_APP_BASE_URL; // address of web-socket server
-
-const socket = io.connect(URL);
-// or
-// const socket = io(URL);
-// socket.connect();
-
-//%/ Connection to backend (to web-socket server)
 
 const ContactsPage = lazy(() => import("common/pages/ContactsPage"));
 const RegisterPage = lazy(() => import("common/pages/RegisterPage"));
 const LoginPage = lazy(() => import("common/pages/LoginPage"));
 const NotFoundPage = lazy(() => import("common/pages/NotFoundPage"));
+const ChatPage = lazy(() => import("common/pages/ChatPage"));
 
 export default function App() {
   const dispatch = useDispatch();
