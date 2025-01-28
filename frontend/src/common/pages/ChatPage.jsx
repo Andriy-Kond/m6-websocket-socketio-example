@@ -14,13 +14,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
 //% Connection to backend (to web-socket server)
-// "undefined" means the URL will be computed from the `window.location` object
 const URL = process.env.REACT_APP_BASE_URL; // address of web-socket server
-const socket = io.connect(URL);
 
-// or
-// const socket = io(URL);
-// socket.connect();
+const socket = io(URL, { autoConnect: false });
+socket.connect();
+// or:
+// const socket = io.connect(URL);
 //%/ Connection to backend (to web-socket server)
 
 export default function ChatPage() {
@@ -28,52 +27,58 @@ export default function ChatPage() {
   const [messages, setMessages] = useState([]); // array of messages (this user and other users)
 
   //% Hang event listener of events "chat-message" (messages from other users)
-  //# Opt1 - use return for remove listener
+  //# Opt1 - use useRef for add only one listener (return can be added or not)
+  // const isListenerSet = useRef(false);
   // useEffect(() => {
-  //   const handleChatMessage = message => {
-  //     setMessages(prevState => {
-  //       const newMessage = {
-  //         id: nanoid(),
-  //         type: "user",
-  //         message,
-  //       };
+  //   if (!isListenerSet.current) {
+  //     const handleChatMessage = message => {
+  //       setMessages(prevState => {
+  //         const newMessage = {
+  //           id: nanoid(),
+  //           type: "user",
+  //           message,
+  //         };
+  //         return [newMessage, ...prevState];
+  //       });
+  //     };
 
-  //       return [newMessage, ...prevState];
-  //     });
-  //   };
+  //     socket.on("chat-message", handleChatMessage);
 
-  //   socket.on("chat-message", handleChatMessage);
+  //     isListenerSet.current = true;
 
-  //   // Remove listener
-  //   return () => {
-  //     socket.off("chat-message", handleChatMessage);
-  //   };
+  //     // return () => {
+  //     //   socket.off("chat-message", handleChatMessage);
+  //     //   isListenerSet.current = false;
+  //     // };
+  //   }
   // }, []);
 
-  //# Opt2 - use useRef for add only one listener (return can be added or not)
-  const isListenerSet = useRef(false);
+  //# Opt2 - use return for remove listener
+  // This option better - it works in most scenarios, more flexible, less code
   useEffect(() => {
-    if (!isListenerSet.current) {
-      const handleChatMessage = message => {
-        setMessages(prevState => {
-          const newMessage = {
-            id: nanoid(),
-            type: "user",
-            message,
-          };
-          return [newMessage, ...prevState];
-        });
-      };
-
-      socket.on("chat-message", handleChatMessage);
-
-      isListenerSet.current = true;
-
-      // return () => {
-      //   socket.off("chat-message", handleChatMessage);
-      //   isListenerSet.current = false;
-      // };
+    // if socket's URL have option { autoConnect: false } you must to make connection explicitly:
+    if (!socket.connected) {
+      socket.connect(); // Explicit (forced) connection
     }
+
+    const handleChatMessage = message => {
+      setMessages(prevState => {
+        const newMessage = {
+          id: nanoid(),
+          type: "user",
+          message,
+        };
+
+        return [newMessage, ...prevState];
+      });
+    };
+
+    socket.on("chat-message", handleChatMessage);
+
+    // Remove listener before next render:
+    return () => {
+      socket.off("chat-message", handleChatMessage);
+    };
   }, []);
   //%/ Hang event listener of events "chat-message" (messages from other users)
 
