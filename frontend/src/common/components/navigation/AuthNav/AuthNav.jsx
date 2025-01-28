@@ -17,6 +17,12 @@ export default function AuthNav() {
           className={({ isActive }) => clsx(css.link, isActive && css.active)}>
           Login
         </StyledNavLink>
+
+        <StyledNavLink
+          to="/chat"
+          className={({ isActive }) => clsx(css.link, isActive && css.active)}>
+          Chat
+        </StyledNavLink>
       </div>
     </>
   );
